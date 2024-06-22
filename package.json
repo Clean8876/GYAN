@@ -4,7 +4,11 @@
   "description": "E-Learning platform",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/Clean8876/GYAN/issues"
   },
-  "homepage": "https://github.com/Clean8876/GYAN#readme"
+  "homepage": "https://github.com/Clean8876/GYAN#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "concurrent": "^0.3.2",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.7.0"
+  }
 }
