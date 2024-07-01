@@ -1,8 +1,8 @@
-export const notFound = (res,req,next) => {
-    const error = new Error(`NOT FOund ${req.orginalUrl}`);
+export const notFound = (req, res, next) => {
+    const error = new Error(`NOT FOUND - ${req.originalUrl}`);
     res.status(404);
-    next(error)
-    }
+    next(error);
+  };
     
     export const errorHandler = (err,req,res,next)=>{
         const setcode = res.setcode === 200 ? 500 : res.setcode;

@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import { notFound,errorHandler } from "./middleware/errorMiddleware.js";
 import {router} from './route/userRoute.js'
 import { courseRouter } from "./route/courseRoute.js";
+import { payrouter } from "./route/paymentRoute.js";
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
@@ -25,6 +26,7 @@ app.use(fileUpload({
 app.use(cookieParser())
 app.use('/api/user', router);
 app.use('/api/course', courseRouter);
+app.use('/api/pay', payrouter);
 app.use(notFound);
 app.use(errorHandler);
 //setting Port 

@@ -26,6 +26,7 @@
     "concurrent": "^0.3.2",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
-    "mongodb": "^6.7.0"
+    "mongodb": "^6.7.0",
+    "razorpay": "^2.9.4"
   }
 }

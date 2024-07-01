@@ -22,20 +22,20 @@ export const restLink = async(req,res)=>{
 
         }
         //genrate the random token
-        const tokken =  crypto.randomUUID();
+        const token =  crypto.randomUUID();
         //update the user with the token
 
 
         const updateUser = await User.findOneAndUpdate(
             {email},
             {
-                tokken,
+                token,
                 resetPasswordExpires:Date.now() + 5*60*1000,
             },
             {new:true}
 
         )
-        const URL = `http://localhost:3000/changePassword/${tokken}`
+        const URL = `http://localhost:3000/changePassword/${token}`
 
         await mailSender(email,"password reset Link",
             `password rest link :${URL}`
@@ -46,32 +46,34 @@ export const restLink = async(req,res)=>{
        });
 
     }
-    catch(err){
+    catch (err) {
+        console.error(err); // Log the error for debugging
         res.status(500).json({
-            success: false,
-            message:"Internal Server Error"
-        })
-    }
+          success: false,
+          message: "Internal Server Error"
+        });
+      }
 
 }
 
-
+//Update the Password
 export const resetPassword = async(req,res)=>{
     try{
-        const{password,confirmpassword,tokken} = req.body;
+        const{password,confirmpassword,token} = req.body;
         if(password !== confirmpassword){
             return res.json({success:false,
                 message:"password and confirm password not match",})
         }
-        const user = await User.findOne({tokken})
+        const user = await User.findOne({token})
         if(!user){
             return res.json({success:false,
                 message:"Invalid tokken",})
 
         }
+        //update the password
         const hassedPaasword = await bcrypt.hash(password,10)
         await User.findOneAndUpdate(
-            {tokken},
+            {token},
             {password:hassedPaasword},
             {new:true},)
             return res.json({

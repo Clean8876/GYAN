@@ -1,5 +1,7 @@
 
 import mongoose, { Types } from "mongoose";
+import Section from "../models/Section.js";
+
 
 
 const courseSchema = new mongoose.Schema({
@@ -14,19 +16,19 @@ const courseSchema = new mongoose.Schema({
     },
     courseContent: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Section",
+			type:mongoose.Schema.Types.ObjectId,
+			ref:"Section",
 		},
 	],
     instructor:{
         type:mongoose.Schema.Types.ObjectId,
         required: true,
-		ref: "user",
+		ref: "User",
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "category",
+        ref: "Category",
         },
     image:{
          type:String
@@ -40,7 +42,7 @@ const courseSchema = new mongoose.Schema({
             ref: "rating",
     },
     students:[{type: mongoose.Schema.Types.ObjectId,
-            ref: "user",
+            ref: "User",
             required:true,},],
     status:{
             type:String,
