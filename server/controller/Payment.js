@@ -23,7 +23,6 @@ export const buyCourse = async (req, res) => {
 
     let totalAmount = 0;
     try {
-        console.log("Course ID:", courses);
 
         if (!mongoose.Types.ObjectId.isValid(courses)) {
             return res.status(400).json({ msg: `Invalid Course ID: ${courses}` });

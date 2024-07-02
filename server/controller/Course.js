@@ -2,6 +2,10 @@ import Course from "../models/Course.js";
 import Category from "../models/Category.js";
 import User from "../models/User.js";
 import { uploadImageToCloudinary } from "../utils/fileUploader.js";
+import { convertSecondsToDuration } from "../utils/secondToDuration.js";
+import Section from "../models/Section.js";
+import SubSection from "../models/subSection.js";
+
 
 
 
@@ -208,7 +212,7 @@ export const getFullCourseDetailes = async (req,res)=> {
         success: false,
         message: 'User not found',
       });*/
-    const courseProgress = user.courseProgress;
+  /*   const courseProgress = user.courseProgress;
     const progressData = courseProgress.map(progress => {
       const course = progress.courseID;
       const totalVideos = course.courseContent.reduce((total, section) => total + section.subSection.length, 0);
@@ -222,11 +226,11 @@ export const getFullCourseDetailes = async (req,res)=> {
         progressPercentage,
         timeRemaining,
       };
-    });
+    }); */
     
     return res.status(200).json({
       success: true,
-      data: progressData,
+      message:'full Course detailes'
     })
   }
   catch(err){
@@ -234,13 +238,75 @@ export const getFullCourseDetailes = async (req,res)=> {
   }
 }
 
+export const getInstructorCourse = async(req,res)=>{
+  try{const userId = req.user.id
+  const inst = await Course.find(userId).sort({createdAt: -1})
+res.json({
+  success:true,
+  message:'instructor course',
+})
+}
+catch(err){
+  console.error(err)
+  res.status(500).json({
+    success:false,
+    message:'server error'
+  })
+}
+  
+}
 
 
+export const deleteCourse = async (req,res)=>{
+  try {
+    const { courseId } = req.body
 
+    // Find the course
+    const course = await Course.findById(courseId)
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" })
+    }
 
+    // Unenroll students from the course
+    const studentsEnrolled = course?.students
+    for (const studentId of studentsEnrolled) {
+      await User.findByIdAndUpdate(studentId, {
+        $pull: { courses: courseId },
+      })
+    }
 
+    // Delete sections and sub-sections
+    const courseSections = course?.courseContent
+    for (const sectionId of courseSections) {
+      // Delete sub-sections of the section
+      const section = await Section.findById(sectionId)
+      if (section) {
+        const subSections = section?.subSection
+        for (const subSectionId of subSections) {
+          await SubSection.findByIdAndDelete(subSectionId)
+        }
+      }
 
+      // Delete the section
+      await Section.findByIdAndDelete(sectionId)
+    }
 
+    // Delete the course
+    await Course.findByIdAndDelete(courseId)
+
+    return res.status(200).json({
+      success: true,
+      message: "Course deleted successfully",
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    })
+  }
+}
 
 
 
