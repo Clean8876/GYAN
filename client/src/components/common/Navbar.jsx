@@ -75,7 +75,8 @@ function Navbar() {
     setAnchorEl(null);
   };
   const handleCategoryClick = (item) => {
-    navigate(`/category/${item.name}`);
+    const categoryName = item.name.replace(/\s+/g, '-');
+    navigate(`/category/${categoryName}`);
     handleMenuClose();
   };
   const handleDrawerToggle = () => {

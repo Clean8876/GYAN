@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom"
 import Signup from "./pages/Signup"
 import Emailverify from "./pages/Emailverify"
 import Login from "./pages/Login"
+import Catalog from "./pages/Catalog"
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Navbar/>
     <Routes>
       <Route path="/" element={<Home/>}/>
+      <Route path="/category/:catalogName" element={<Catalog/>}/>
    
      
         <Route path="/signup" element={<Signup/>}/>

@@ -155,39 +155,39 @@ export const getAllCourses = async (req, res) => {
 }
 // get a Specific Course when students buy the course 
 
-export const getCourseDetails = async (req,res)=>{
-  try{
+export const getCourseDetails = async (req, res) => {
+  try {
+    const { id } = req.body; // Extracting _id from req.body
+    const courseDetails = await Course.findById(id)
+      .populate('instructor')
+      .populate('category')
+      .populate('rating')
+      .populate({
+        path: 'courseContent',
+        populate: {
+          path: 'SubSection',
+        },
+      });
 
-  const coursedetails = await Course.findById(req.body)
-  .populate("instructor")
-  .populate("category")
-  .populate("rating")
-  .populate({
-    path: "courseContent",
-    populate: {
-      path: "SubSection",
-      select:'video'}
-  })
-  if(!coursedetails){
-    return res.status(404).json({
-      success:false,
-      message:'Course not Found'})
-}
-return res.status(200).json({
-  success:true,
-  data:coursedetails,
-})
-  
+    if (!courseDetails) {
+      return res.status(404).json({
+        success: false,
+        message: 'Course not found',
+      });
+    }
 
-}
-catch(err){
-  console.error(err)
-  return res.status(500).json({
-    success:false,
-    message:'Internal Server Error',
-  })
-}
-}
+    return res.status(200).json({
+      success: true,
+      data: courseDetails,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error',
+    });
+  }
+};
 // get the course detales of the perticular student
 export const getFullCourseDetailes = async (req,res)=> {
   const userId = req.params.id

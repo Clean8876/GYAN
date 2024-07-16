@@ -37,18 +37,18 @@ export const getCategory = async(req,res)=>{
         res.status(404).json({message:"Categories not found"});
         }
         }
-    export const getCategoryDetails = async (req, res) => {
+        export const getCategoryDetails = async (req, res) => {
             try {
               const { categoryId } = req.body;
-              console.log("PRINTING CATEGORY ID:", categoryId);
+             
           
               // Get courses for the specified category
               const selectedCategory = await Category.findById(categoryId)
                 .populate({
-                  path: "courses",
+                  path: "course", // Changed from "courses" to "course"
                   match: { status: "Published" },
                 })
-                .exec();
+      
           
               // Handle the case when the category is not found
               if (!selectedCategory) {
@@ -56,40 +56,45 @@ export const getCategory = async(req,res)=>{
                 return res.status(404).json({ success: false, message: "Category not found" });
               }
           
-              // Handle the case when there are no courses
-              if (selectedCategory.courses.length === 0) {
+              // Handle the case when course is undefined or empty
+              if (!selectedCategory.course || selectedCategory.course.length === 0) {
                 console.log("No courses found for the selected category.");
                 return res.status(404).json({
                   success: false,
                   message: "No courses found for the selected category.",
                 });
               }
+          /* 
               const categoriesExceptSelected = await Category.find({
                 _id: { $ne: categoryId },
-              })
-              let differentCategory = await Category.findOne(
-                categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
-                  ._id
-              )
-                .populate({
-                  path: "courses",
-                  match: { status: "Published" },
-                })
-                .exec()
+              });
+          
+              // Check if there are any other categories
+              if (categoriesExceptSelected.length > 0) {
+                let differentCategory = await Category.findOne(
+                  categoriesExceptSelected[Math.floor(Math.random() * categoriesExceptSelected.length)]._id
+                )
+                  .populate({
+                    path: "course", // Changed from "courses" to "course"
+                    match: { status: "Published" },
+                  })
+                  .exec();
+                // You can use differentCategory here if needed
+              }
           
               // Fetch new courses
-              const newCourses = selectedCategory.courses
+              const newCourses = selectedCategory.course
                 .filter(course => course.isNew)
-                .sort((a, b) => b.createdAt - a.createdAt);
+                .sort((a, b) => b.createdAt - a.createdAt); */
           
               res.status(200).json({
                 success: true,
                 data: {
                   selectedCategory,
-                  newCourses,
                 },
               });
             } catch (error) {
+              console.error("Error in getCategoryDetails:", error);
               return res.status(500).json({
                 success: false,
                 message: "Internal server error",
@@ -97,6 +102,3 @@ export const getCategory = async(req,res)=>{
               });
             }
           };
-
-
-

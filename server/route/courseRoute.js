@@ -10,7 +10,7 @@ export  const courseRouter = express.Router()
 courseRouter.post('/createcategory',createCategory);
 courseRouter.delete('/deletecategory/:id',delCategory);
 courseRouter.get('/category/',getCategory);
-courseRouter.get('/getCategoryPageDetails',getCategoryDetails);
+courseRouter.post('/getCategoryPageDetails',getCategoryDetails);
 courseRouter.post('/createcourse/:id',authenticateToken,forInstructor,createCourse);
 courseRouter.put('/editcourse/',authenticateToken,forInstructor,editCourse);
 courseRouter.get('/',getAllCourses);
