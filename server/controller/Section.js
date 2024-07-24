@@ -9,8 +9,8 @@ import SubSection from "../models/subSection.js";
 export const createSection = async(req,res)=>{
     try{
         // getting the courseId and the Section name
-        const {sectionName} = req.body;
-        const courseId = req.params.courseId;
+        const {sectionName,courseId} = req.body;
+      
 
 
         if(!courseId){
@@ -62,7 +62,7 @@ catch(err){
 }
 export const getSection = async(req,res)=>{
     try{
-        const sectionId = req.params.id;
+        const sectionId = req.body;
         const section = await Section.findById(sectionId).populate('subSection');
     
         if (!section) {

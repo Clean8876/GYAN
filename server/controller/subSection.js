@@ -7,8 +7,8 @@ import { ConnectionCheckOutStartedEvent } from 'mongodb';
 export const createSubSection = async (req, res) => {
   try {
     // Extract necessary information from the request body
-    const {  title, description } = req.body
-    const sectionId = req.params.id
+    const {  title, description,sectionId } = req.body
+  
     const video = req.files.video
 
      //Check if all necessary fields are provided

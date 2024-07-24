@@ -5,10 +5,17 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Worldmap from '../../common/imagesComponents/Worldmap';
+import CourseInfo from '../Dashboard/COURSEINFORMATION/CourseInfo';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate()
+  const handelClick = ()=>{
+    console.log("clicked")
+    navigate('/addcourse')
+  }
   return (
-<div className="min-h-screen flex flex-col">
+<div className="min-h-screen flex flex-col overflow-y-auto">
   {/* <Navbar /> */}
   <React.Fragment>
     <CssBaseline />
@@ -30,12 +37,13 @@ function Home() {
       >
         <Box sx={{ flexBasis: { md: '60%',lg:'80%' }, marginBottom: { xs: '30px', md: 0 } }}>
           <p className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[36px] tracking-[0] leading-tight mb-6">
-            <span className="text-black">Empower Your Future with </span>
-            <span className="text-[#ff6525]">Coding Skills</span>
+            <span className="text-gray-900 font-popo">Empower Your Future with </span>
+            <span className="text-[#ff6525] font-popo" >Coding Skills</span>
           </p>
-          <p className="text-black font-semibold text-base sm:text-lg md:text-xl lg:text-2xl">
+          <p className="text-gray-900 font-semibold text-base sm:text-lg md:text-xl lg:text-2xl font-mono">
             With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors.
           </p>
+          <button className='color:black font-mono' onClick={handelClick} >Hello</button>
         </Box>
         <Box
           sx={{
@@ -73,13 +81,13 @@ function Home() {
     }}
   >
  <div className="flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
-  <div className="text-[#FF6525] font-['Inter'] text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[3px] text-center">
+  <div className="text-[#FF6525] font-popo text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[3px] text-center">
     Join The Community
   </div>
-  <div className="text-[#000] font-['Saira_Condensed'] text-lg sm:text-xl lg:text-4xl font-bold tracking-[1.8px] max-w-[740px] text-center mt-4">
-    Build the community of learning together,
-    and make the world joy of learning coding
-  </div>
+  <div className="text-gray-900 font-mono font-semibold text-lg sm:text-xl lg:text-4xl tracking-tight leading-relaxed max-w-[740px] text-center mt-4 bg-gray-100 p-4 rounded-lg shadow-sm">
+  Build the community of learning together,
+  and make the world joy of learning coding
+</div>
   <div className="mt-[100px]">
     <Worldmap/>
   </div>

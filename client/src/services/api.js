@@ -16,6 +16,8 @@ export const courseEndpoints = {
 
   COURSE_DETAILS_API: BASE_URL + "/course/getCourseDetails",
   COURSE_CATEGORIES_API: BASE_URL + "/course/category/",
+  CREATE_COURSE_API:BASE_URL+"/course/createcourse/",
+  EDIT_COURSE_API:BASE_URL+"/course/editcourse/"
 
 }
 
@@ -29,6 +31,10 @@ export const catalogData = {
   CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
 }
 
+export const studentEndpoint ={
+CAPTUREPAYMENT_API :BASE_URL+"/pay/capturePayment",
+VERIFYPAYMENT_API:BASE_URL+'/pay/verifyPayment'
+}
 
 
 

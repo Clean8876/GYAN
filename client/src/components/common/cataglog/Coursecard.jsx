@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 //import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import Box from '@mui/material/Box';
 function Coursecard({ course }) {
     return (
         <Link to={`/courses/${course._id}`} className="block">
@@ -17,13 +17,35 @@ function Coursecard({ course }) {
           image={course?.image}
           title={course?.title}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h4" component="div">
+        <CardContent sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      padding: '24px',
+      borderRadius: '16px',
+      backgroundColor: '#F5F5F5', // Or your desired background color
+      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+    }}>
+          <Typography gutterBottom variant="h4" component="div" sx={{
+        fontFamily: 'Poppins',
+        fontWeight: 600,
+        color: '#333',
+      }}>
           {course?.title}
           </Typography>
-          <Typography variant="body3" color="text.secondary">
+          <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
+        <Typography variant="body2" sx={{
+          fontFamily: 'JetBrains Mono',
+          color: '#0e0c0c',
+        }}>
           Rs. {course?.price}
-          </Typography>
+        </Typography>
+        {/* Add any additional elements here, like icons or buttons */}
+      </Box>
         </CardContent>
       
       </Card>

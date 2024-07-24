@@ -3,10 +3,10 @@ import JWT from 'jsonwebtoken';
 import asyncHandler from "express-async-handler"
  export const authenticateToken = asyncHandler(async(req, res, next) => {
     try {
-  const token = req.cookies.JWT;
+  const token = req.cookies.JWT || req.headers.authorization?.split(' ')[1];
   console.log(token)
   if (!token) {
-    return res.status(403).json({ message: 'A token is required for authentication' });
+    return res.status(403).json({ message: 'A Token is required for authentication' });
   }
 
     const decoded = JWT.verify(token, process.env.JWT_SECRET);

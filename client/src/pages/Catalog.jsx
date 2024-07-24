@@ -52,12 +52,12 @@ function Catalog() {
         <div>
             <div className="box-content bg-white px-4">
                 <div className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent">
-                    <p className="text-sm text-black">
+                    <p className="text-sm text-black font-extrabold">
                         {`Home / Catalog /`}
-                        <span className="text-black">{category?.name}</span>
+                        <span className="text-black font-extrabold">{category?.name}</span>
                     </p>
-                    <p className="text-3xl text-richblack-5">{category?.name}</p>
-                    <p className="max-w-[870px] text-richblack-200">{category?.description}</p>
+                    <p className="text-3xl text-richblack-5 font-mono">{category?.name}</p>
+                    <p className="max-w-[870px] text-richblack-200 font-mono">{category?.description}</p>
                 </div>
             </div>
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">

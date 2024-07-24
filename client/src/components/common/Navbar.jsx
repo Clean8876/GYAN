@@ -23,8 +23,9 @@ import Logoutbutton from './button/Logoutbutton';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 import { fetchCourseCategories } from '../../services/operations/courseApi';
-
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { logout } from '../../services/operations/authApi';
+
 // import axios from 'axios';
 
 function Navbar() {
@@ -94,6 +95,7 @@ function Navbar() {
   navigate('/dashboard')
     handleCloseUserMenu();
   };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <img src={logo} alt="Logo" style={{ height: '40px', marginRight: '10px' }} />
@@ -135,20 +137,60 @@ function Navbar() {
               gap: '12px',
             }}
           >
-            <Button key="home" onClick={handleHome} sx={{ color: 'black', fontWeight: '600', fontSize: '24px',fontFamily:'Saira Condensed' }}>
+            <Button key="home" onClick={handleHome} sx={{
+  color: '#333333',
+  backgroundColor: '#f5f5f5',
+  fontWeight: '600',
+  fontSize: '24px',
+  fontFamily: 'Poppins',
+  textTransform: 'uppercase',
+  '&:hover': {
+    backgroundColor: '#f86e33b7',
+    cursor: 'pointer',
+  },
+}}>
               Home
             </Button>
-            <Button key="Category" sx={{ color: 'black', fontWeight: '600', fontSize: '24px',fontFamily:'Saira Condensed'}} onClick={handleMenuOpen}>
+            <Button key="Category" sx={{
+color: '#333333', // Change text color to white for a premium feel
+backgroundColor: '#f5f5f5', // Change background to dark for premium look
+fontWeight: 'bold', // Adjust font weight for boldness
+fontSize: '24px', // Adjust font size for flexibility
+fontFamily: 'Poppins', // Maintain Poppins font
+// Adjust padding for comfort
+borderRadius: '3px', // Subtle border radius
+boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', // Subtle shadow for depth
+transition: 'all 0.2s ease-in-out', // Smooth hover effect
+ // Space between text and icon
+cursor: 'pointer', // Ensure pointer behavior,
+'&:hover': {
+  backgroundColor: '#f86e33b7', // Darken background on hover
+  cursor: 'pointer',
+  // ... other hover styles if needed
+}
+}} onClick={handleMenuOpen} endIcon={<ExpandMoreIcon sx={{ color: '#333333' }} />}>
               Category 
             </Button>
-            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}
+            >
               {menuItems.map((item) => (
                 <MenuItem key={item.id} onClick={handleMenuClose}>
                   {item.name}
                 </MenuItem>
               ))}
             </Menu>
-            <Button key="about-us" sx={{ color: 'black',fontWeight: '600', fontSize: '24px',fontFamily:'Saira Condensed' }}>
+            <Button key="about-us" sx={{
+  color: '#333333',
+  backgroundColor: '#f5f5f5',
+  fontWeight: '600',
+  fontSize: '24px',
+  fontFamily: 'Poppins',
+  textTransform: 'uppercase',
+  '&:hover': {
+    backgroundColor: '#f86e33b7',
+    cursor: 'pointer',
+  },
+}}>
               About Us
             </Button>
           </Box>

@@ -3,17 +3,14 @@
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 
-
-
-function Openroute({children}) {
-    const { token } = useSelector((state) => state.auth)
+function OpenRoute({ children }) {
+  const { token } = useSelector((state) => state.auth)
 
   if (token === null) {
     return children
   } else {
-    return <Navigate to="/home/dashboard" />
+    return <Navigate to="/dashboard" />
   }
-
 }
 
-export default Openroute
+export default OpenRoute

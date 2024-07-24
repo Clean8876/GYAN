@@ -165,9 +165,9 @@ export const getCourseDetails = async (req, res) => {
       .populate({
         path: 'courseContent',
         populate: {
-          path: 'SubSection',
+            path: 'subSection',
         },
-      });
+    })
 
     if (!courseDetails) {
       return res.status(404).json({

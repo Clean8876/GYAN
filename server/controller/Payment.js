@@ -8,7 +8,8 @@ import crypto from "crypto"
 //caputre the course wanted to buy for the user
 export const buyCourse = async (req, res) => {
     // taking the Course and user id thorugh the body
-    const { user,courses } = req.body;
+    const { courses,user } = req.body;
+   // const user = req.user.id;
     //const  = '66757ef727845429f2d581b9'; // Single course ID as a string
     console.log(courses);
 
@@ -59,7 +60,7 @@ export const buyCourse = async (req, res) => {
             order_id: payment.id,
             amount: options.amount,
             currency: options.currency,
-            payment
+            msg:payment
         });
     } catch (err) {
         console.error(err);
@@ -68,7 +69,16 @@ export const buyCourse = async (req, res) => {
 }
 // verify the secured payment made by razorpay from client to server
 export const verifyPayment = async (req, res) => {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, userId, courses } = req.body;
+    const razorpay_order_id = req.body?.razorpay_order_id;
+    const razorpay_payment_id = req.body?.razorpay_payment_id;
+    const razorpay_signature = req.body?.razorpay_signature;
+    const courses = req.body?.courses;
+    const userId = req.user.id;
+    if(!razorpay_order_id ||
+        !razorpay_payment_id ||
+        !razorpay_signature || !courses || !userId) {
+            return res.status(200).json({success:false, message:"Payment Failed"});
+    }
     //generate tge signature 
     const generated_signature = crypto.createHmac("sha256", process.env.RAZORPAY_SECRETID)
         .update(razorpay_order_id + "|" + razorpay_payment_id)

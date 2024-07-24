@@ -11,14 +11,14 @@ courseRouter.post('/createcategory',createCategory);
 courseRouter.delete('/deletecategory/:id',delCategory);
 courseRouter.get('/category/',getCategory);
 courseRouter.post('/getCategoryPageDetails',getCategoryDetails);
-courseRouter.post('/createcourse/:id',authenticateToken,forInstructor,createCourse);
+courseRouter.post('/createcourse/',authenticateToken,forInstructor,createCourse);
 courseRouter.put('/editcourse/',authenticateToken,forInstructor,editCourse);
 courseRouter.get('/',getAllCourses);
 courseRouter.post('/getCourseDetails',getCourseDetails);
 courseRouter.get('courseProgress/:id',authenticateToken ,getFullCourseDetailes)
-courseRouter.post('/addsection/:courseId',createSection)
-courseRouter.get('/section/:id',getSection)
-courseRouter.post('/section/:id/subsection/',createSubSection)
+courseRouter.post('/addsection',createSection)
+courseRouter.get('/section/',getSection)
+courseRouter.post('/section/subsection/',createSubSection)
 courseRouter.put('/section/updatesection/',updateSection)
 courseRouter.post('/section/deleteSection/',deleteSection)
 courseRouter.post('/section/:id/updatesubsection/',updateSubSection)
