@@ -8,6 +8,7 @@ import Worldmap from '../../common/imagesComponents/Worldmap';
 import CourseInfo from '../Dashboard/COURSEINFORMATION/CourseInfo';
 import { useNavigate } from 'react-router-dom';
 
+
 function Home() {
   const navigate = useNavigate()
   const handelClick = ()=>{
@@ -87,6 +88,7 @@ function Home() {
   <div className="text-gray-900 font-mono font-semibold text-lg sm:text-xl lg:text-4xl tracking-tight leading-relaxed max-w-[740px] text-center mt-4 bg-gray-100 p-4 rounded-lg shadow-sm">
   Build the community of learning together,
   and make the world joy of learning coding
+ 
 </div>
   <div className="mt-[100px]">
     <Worldmap/>

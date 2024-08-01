@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
@@ -9,6 +10,8 @@ import { setCourse,setStep } from "../../../../slices/courseSlice"
 import Upload from "../Upload"
 import ChipInput from "../ChipInput"
 import { COURSE_STATUS } from "../../../../utils/constants"
+import Iconbtn from '../../../common/iconbtn'
+import { editCourseDetails } from "../../../../services/operations/courseApi"
 function CourseInfo() {
     const {
         register,
@@ -46,9 +49,9 @@ function CourseInfo() {
       }
       getCategories()
     },[])
-/*     const isFormUpdated = () => {
+    const isFormUpdated = () => {
         const currentValues = getValues()
-        // console.log("changes after editing form values:", currentValues)
+        console.log("changes after editing form values:", currentValues)
         if (
           currentValues.courseTitle !== course.title ||
           currentValues.courseShortDesc !== course.description ||
@@ -60,11 +63,11 @@ function CourseInfo() {
           return true
         }
         return false
-      } */
+      }
       const onSubmit = async (data) => {
-        // console.log(data)
+        console.log(data)
     
-        /* if (editCourse) {
+        if (editCourse) {
           // const currentValues = getValues()
           // console.log("changes after editing form values:", currentValues)
           // console.log("now course:", course)
@@ -116,16 +119,16 @@ function CourseInfo() {
             toast.error("No changes made to the form")
           }
           return
-        } */
+        }
     
         const formData = new FormData()
-        formData.append("courseName", data.courseTitle)
-        formData.append("courseDescription", data.courseShortDesc)
+        formData.append("title", data.courseTitle)
+        formData.append("description", data.courseShortDesc)
         formData.append("price", data.coursePrice)
         formData.append("tag", JSON.stringify(data.courseTags))    
         formData.append("category", data.courseCategory)
         formData.append("status", COURSE_STATUS.DRAFT)
-        formData.append("thumbnailImage", data.courseImage)
+        formData.append("image", data.courseImage)
         setLoading(true)
         const result = await addCourseDetails(formData, token)
         if (result) {
@@ -143,7 +146,7 @@ function CourseInfo() {
     {/* Course Title */}
     <div className="flex flex-col space-y-2">
       <label className="text-sm text-richblack-5" htmlFor="courseTitle">
-        Course Title <sup className="text-pink-200">*</sup>
+        Course Title <sup className="text-red-500">*</sup>
       </label>
       <input
         id="courseTitle"
@@ -152,7 +155,7 @@ function CourseInfo() {
         className="form-style w-full"
       />
       {errors.courseTitle && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs tracking-wide text-red-500">
           Course title is required
         </span>
       )}
@@ -160,7 +163,7 @@ function CourseInfo() {
     {/* Course Short Description */}
     <div className="flex flex-col space-y-2">
       <label className="text-sm text-richblack-5" htmlFor="courseShortDesc">
-        Course Short Description <sup className="text-pink-200">*</sup>
+        Course Short Description <sup className="text-red-500">*</sup>
       </label>
       <textarea
         id="courseShortDesc"
@@ -169,7 +172,7 @@ function CourseInfo() {
         className="form-style resize-x-none min-h-[130px] w-full"
       />
       {errors.courseShortDesc && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs tracking-wide text-red-500">
           Course Description is required
         </span>
       )}
@@ -177,7 +180,7 @@ function CourseInfo() {
     {/* Course Price */}
     <div className="flex flex-col space-y-2">
       <label className="text-sm text-richblack-5" htmlFor="coursePrice">
-        Course Price <sup className="text-pink-200">*</sup>
+        Course Price <sup className="text-red-500">*</sup>
       </label>
       <div className="relative">
         <input
@@ -195,7 +198,7 @@ function CourseInfo() {
         <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400" />
       </div>
       {errors.coursePrice && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs tracking-wide text-red-500">
           Course Price is required
         </span>
       )}
@@ -203,7 +206,7 @@ function CourseInfo() {
     {/* Course Category */}
     <div className="flex flex-col space-y-2">
       <label className="text-sm text-richblack-5" htmlFor="courseCategory">
-        Course Category <sup className="text-pink-200">*</sup>
+        Course Category <sup className="text-red-500">*</sup>
       </label>
       <select
         {...register("courseCategory", { required: true })}
@@ -222,7 +225,7 @@ function CourseInfo() {
           ))}
       </select>
       {errors.courseCategory && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs tracking-wide text-red-500">
           Course Category is required
         </span>
       )}
@@ -259,13 +262,15 @@ function CourseInfo() {
           Continue Wihout Saving
         </button>
       )}
-{/*       <IconBtn
-        disabled={loading}
-        text={!editCourse ? "Next" : "Save Changes"}
-      >
-        <MdNavigateNext />
-      </IconBtn> */}
+      <Iconbtn disabled={loading}
+          text={!editCourse ? "Next" : "Save Changes"}
+>
+      <MdNavigateNext/>
+        
+      </Iconbtn> 
+    
     </div>
+
   </form>
   )
 }
