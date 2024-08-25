@@ -54,8 +54,8 @@ export const createSubSection = async (req, res) => {
 export const updateSubSection = async (req, res) => {
   try {
     //get the id from the parameter
-    const subSectionId = req.params.id
-    const { sectionId, title, description } = req.body
+    
+    const { sectionId, title, description,subSectionId } = req.body
     const subSection = await SubSection.findById(subSectionId)
 
     if (!subSection) {
@@ -103,8 +103,8 @@ export const updateSubSection = async (req, res) => {
 //deleting the subsection
 export const deleteSubSection = async (req, res) => {
   try {
-    const subSectionId = req.params.id
-    const {sectionId } = req.body
+   
+    const {sectionId ,subSectionId} = req.body
     //removing the subSection ref from the Section
     await Section.findByIdAndUpdate(
       { _id: sectionId },

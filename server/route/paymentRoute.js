@@ -6,5 +6,5 @@ import { authenticateToken ,forInstructor,forStudent} from '../middleware/authMi
 export const payrouter = express.Router()
 
 
-payrouter.post("/capturePayment", authenticateToken, forStudent, buyCourse)
-payrouter.post("/verifyPayment",authenticateToken, forStudent, verifyPayment)
+payrouter.post("/capturePayment", authenticateToken,forStudent, buyCourse)
+payrouter.post("/verifyPayment",authenticateToken,forStudent,  verifyPayment)

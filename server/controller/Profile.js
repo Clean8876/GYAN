@@ -1,9 +1,12 @@
+import User from "../models/User.js";
 export const getAllUserDetails = async (req, res) => {
 	try {
-		const id = req.body;
-		const userDetails = await User.findById(id)
-			.populate("additionalDetails")
-			.exec();
+		const user_id = req.user.id;
+		const userDetails = await User.findOne({_id: user_id})
+			/* .populate("additionalDetails")
+			.populate("courses")
+			.populate("courseProgress")
+			.exec(); */
 		console.log(userDetails);
 		res.status(200).json({
 			success: true,

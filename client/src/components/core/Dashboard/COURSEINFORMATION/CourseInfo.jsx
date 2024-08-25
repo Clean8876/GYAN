@@ -10,7 +10,7 @@ import { setCourse,setStep } from "../../../../slices/courseSlice"
 import Upload from "../Upload"
 import ChipInput from "../ChipInput"
 import { COURSE_STATUS } from "../../../../utils/constants"
-import Iconbtn from '../../../common/iconbtn'
+import Iconbtn from "../../../common/Iconbtn"
 import { editCourseDetails } from "../../../../services/operations/courseApi"
 function CourseInfo() {
     const {
@@ -110,10 +110,13 @@ function CourseInfo() {
             // console.log("Edit Form data: ", formData)
             setLoading(true)
             const result = await editCourseDetails(formData, token)
+            console.log("response of infois",result)
             setLoading(false)
             if (result) {
               dispatch(setStep(2))
+              
               dispatch(setCourse(result))
+              console.log("setcourse is wokred");
             }
           } else {
             toast.error("No changes made to the form")
@@ -133,6 +136,7 @@ function CourseInfo() {
         const result = await addCourseDetails(formData, token)
         if (result) {
           dispatch(setStep(2))
+          console.log("setStep dispatched with value 2");
           dispatch(setCourse(result))
         }
         setLoading(false)

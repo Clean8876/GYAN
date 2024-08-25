@@ -10,11 +10,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Home() {
-  const navigate = useNavigate()
-  const handelClick = ()=>{
-    console.log("clicked")
-    navigate('/addcourse')
-  }
+
+
   return (
 <div className="min-h-screen flex flex-col overflow-y-auto">
   {/* <Navbar /> */}
@@ -44,7 +41,7 @@ function Home() {
           <p className="text-gray-900 font-semibold text-base sm:text-lg md:text-xl lg:text-2xl font-mono">
             With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors.
           </p>
-          <button className='color:black font-mono' onClick={handelClick} >Hello</button>
+
         </Box>
         <Box
           sx={{

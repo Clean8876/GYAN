@@ -62,24 +62,8 @@ function CourseDetails() {
   const { token } = useSelector((state) => state.auth)
   const { loading } = useSelector((state) => state.profile)
   const { paymentLoading } = useSelector((state) => state.course)
-  // of the user buyed the course it will show go to course
-const handleBuyCourse = () => {
-  if (token) {
-    console.log("Buy button clicked");
-    console.log('Token:', token);
-  console.log('User:', user?._id);
-  buyCourse(token, [course_id], user, navigate, dispatch);
-    return;
-  }
-  setConfirmationModal({
-    text1: "You are not logged in!",
-    text2: "Please login to Purchase Course.",
-    btn1Text: "Login",
-    btn2Text: "Cancel",
-    btn1Handler: () => navigate("/login"),
-    btn2Handler: () => setConfirmationModal(null),
-  });
-};
+
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -87,6 +71,24 @@ const handleBuyCourse = () => {
   const { courseId } = useParams()
 const[response,setResponse] = useState(null)
 const [confirmationModal, setConfirmationModal] = useState(null)
+  // of the user buyed the course it will show go to course
+  const handleBuyCourse = () => {
+    if (token) {
+      console.log("Buy button clicked");
+      console.log('Token:', token);
+    console.log('User:', user);
+    buyCourse(token, [course_id], user, navigate, dispatch);
+      return;
+    }
+    setConfirmationModal({
+      text1: "You are not logged in!",
+      text2: "Please login to Purchase Course.",
+      btn1Text: "Login",
+      btn2Text: "Cancel",
+      btn1Handler: () => navigate("/login"),
+      btn2Handler: () => setConfirmationModal(null),
+    });
+  };
 
 useEffect(() => {
   const fetchData = async () => {

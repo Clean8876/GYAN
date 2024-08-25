@@ -48,6 +48,7 @@ export const createSection = async(req,res)=>{
     res.status(201).json({
         success:true,
         message:"Section Created Successfully",
+        data:updatedCourse
     })
     
     
@@ -140,7 +141,7 @@ export const deleteSection = async (req, res) => {
 			}
 		})
 		const section = await Section.findById(sectionId);
-		console.log(sectionId, courseId);
+	
 		if(!section) {
 			return res.status(404).json({
 				success:false,

@@ -8,7 +8,8 @@ import crypto from "crypto"
 //caputre the course wanted to buy for the user
 export const buyCourse = async (req, res) => {
     // taking the Course and user id thorugh the body
-    const { courses,user } = req.body;
+    const { courses } = req.body;
+    const user = req.user.id;
    // const user = req.user.id;
     //const  = '66757ef727845429f2d581b9'; // Single course ID as a string
     console.log(courses);
@@ -23,19 +24,19 @@ export const buyCourse = async (req, res) => {
     }
 
     let totalAmount = 0;
-    try {
+    for(const course_id of courses){
+         try {
 
-        if (!mongoose.Types.ObjectId.isValid(courses)) {
-            return res.status(400).json({ msg: `Invalid Course ID: ${courses}` });
-        }
+       let course
 
-        const course = await Course.findById(courses);
+         course = await Course.findById(course_id);
         if (!course) {
-            return res.status(400).json({ msg: `Course with ID ${courses} not found` });
+            return res.status(400).json({ msg: `Course with ID ${course} not found` });
         }
-
-        const uid = new mongoose.Types.ObjectId(user); // Correct usage with 'new'
-        if (course.students.includes(uid)) {
+         if (!mongoose.Types.ObjectId.isValid(course)) {
+            return res.status(400).json({ msg: `Invalid Course ID: ${course}` });
+        }
+        if (course.students.includes(user)) {
             return res.status(400).json({ msg: "Course already purchased" });
         }
 
@@ -43,7 +44,8 @@ export const buyCourse = async (req, res) => {
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: "Internal server error", err });
-    }
+    }}
+   
 
     // Create payment config
     const options = {
@@ -57,10 +59,8 @@ export const buyCourse = async (req, res) => {
         res.json({
             success: true,
             message: "Payment initiated successfully",
-            order_id: payment.id,
-            amount: options.amount,
-            currency: options.currency,
-            msg:payment
+            msg:payment,
+            payment
         });
     } catch (err) {
         console.error(err);
@@ -69,10 +69,10 @@ export const buyCourse = async (req, res) => {
 }
 // verify the secured payment made by razorpay from client to server
 export const verifyPayment = async (req, res) => {
-    const razorpay_order_id = req.body?.razorpay_order_id;
-    const razorpay_payment_id = req.body?.razorpay_payment_id;
-    const razorpay_signature = req.body?.razorpay_signature;
-    const courses = req.body?.courses;
+    const razorpay_order_id = req.body.razorpay_order_id;
+    const razorpay_payment_id = req.body.razorpay_payment_id;
+    const razorpay_signature = req.body.razorpay_signature;
+    const courses = req.body.courses;
     const userId = req.user.id;
     if(!razorpay_order_id ||
         !razorpay_payment_id ||
@@ -80,9 +80,14 @@ export const verifyPayment = async (req, res) => {
             return res.status(200).json({success:false, message:"Payment Failed"});
     }
     //generate tge signature 
-    const generated_signature = crypto.createHmac("sha256", process.env.RAZORPAY_SECRETID)
+    /* const generated_signature = crypto.createHmac("sha256", process.env.RAZORPAY_SECRETID)
         .update(razorpay_order_id + "|" + razorpay_payment_id)
-        .digest("hex");
+        .digest("hex"); */
+        let body = razorpay_order_id + "|" + razorpay_payment_id;
+        const generated_signature = crypto
+            .createHmac("sha256", process.env.RAZORPAY_SECRETID)
+            .update(body.toString())
+            .digest("hex");
 
     if (generated_signature === razorpay_signature) {
         try {

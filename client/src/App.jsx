@@ -9,7 +9,11 @@ import Catalog from "./pages/Catalog"
 import OpenRoute from "./components/common/auth/OpenRoute"
 import PrivateRoute from "./components/common/auth/PrivateRoute"
 import CourseDetails from "./pages/CourseDetails"
-import CourseInfo from "./components/core/Dashboard/COURSEINFORMATION/CourseInfo"
+
+import AddCourse from "./components/core/Dashboard/Index"
+import CourseSlice from "./slices/courseSlice"
+import Enrolled from "./components/core/Dashboard/EnrolledCourse/Enrolled"
+
 
 
 function App() {
@@ -22,8 +26,10 @@ function App() {
         <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/>
         <Route path="/verify-email" element={<Emailverify/>}/>
         <Route path="/courses/:courseId" element={<CourseDetails/>}/>
-        <Route path="/addcourse" element={<CourseInfo/>}/>  
+       
         <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}/>
+        <Route path="dashboard/add-course" element={<AddCourse/>} />
+        <Route path="dashboard/enrolled" element={<Enrolled/>} />
     </Routes>
     
     </div>
