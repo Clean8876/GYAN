@@ -5,6 +5,7 @@ import { uploadImageToCloudinary } from "../utils/fileUploader.js";
 import { convertSecondsToDuration } from "../utils/secondToDuration.js";
 import Section from "../models/Section.js";
 import SubSection from "../models/subSection.js";
+import CourseProgress from "../models/courseProgress.js";
 
 
 
@@ -190,53 +191,72 @@ export const getCourseDetails = async (req, res) => {
 };
 // get the course detales of the perticular student
 export const getFullCourseDetailes = async (req,res)=> {
-  const userId = req.params.id
+  const { courseId } = req.body
+    const userId = req.user.id
   try{
-    const user = await  User.findById(userId).populate('courseProgress').populate({
-      path: 'courseProgress',
-      populate: {
-        path: 'courseID',
-        model: 'Course',
-        populate: {
-          path: 'courseContent',
-          model: 'Section',
-          populate: {
-            path: 'subSection',
-            model: 'subSection',
-          },
-        },
-      },
-    });
-/*if (!//user) {
-      return res.status(404).json({
-        success: false,
-        message: 'User not found',
-      });*/
-  /*   const courseProgress = user.courseProgress;
-    const progressData = courseProgress.map(progress => {
-      const course = progress.courseID;
-      const totalVideos = course.courseContent.reduce((total, section) => total + section.subSection.length, 0);
-      const completedVideos = progress.completedVideos.length;
-      const progressPercentage = (completedVideos / totalVideos) * 100;
-      const averageVideoLength = course.averageVideoLength;
-      const remainingVideos = totalVideos - completedVideos;
-      const timeRemaining = averageVideoLength * remainingVideos;
-      return {
-        course,
-        progressPercentage,
-        timeRemaining,
-      };
-    }); */
-    
-    return res.status(200).json({
-      success: true,
-      message:'full Course detailes'
+    const courseDetails = await Course.findOne({
+      _id:courseId,
+    }).populate({
+      path: "instructor",
+   
     })
+    .populate("category")
+    .populate({
+      path: "courseContent",
+      populate: {
+        path: "subSection",
+      },
+    })
+    .exec(); let courseProgressCount = await CourseProgress.findOne({
+        courseID: courseId,
+        userId: userId,
+      })
+  
+      console.log("courseProgressCount : ", courseProgressCount)
+  
+      if (!courseDetails) {
+        return res.status(400).json({
+          success: false,
+          message: `Could not find course with id: ${courseId}`,
+        })
+      }
+  
+      // if (courseDetails.status === "Draft") {
+      //   return res.status(403).json({
+      //     success: false,
+      //     message: `Accessing a draft course is forbidden`,
+      //   });
+      // }
+  
+      let totalDurationInSeconds = 0
+      courseDetails.courseContent.forEach((content) => {
+        content.subSection.forEach((subSection) => {
+          const timeDurationInSeconds = parseInt(subSection.timeDuration)
+          totalDurationInSeconds += timeDurationInSeconds
+        })
+      })
+  
+      const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+  
+      return res.status(200).json({
+        success: true,
+        data: {
+          courseDetails,
+          totalDuration,
+          completedVideos: courseProgressCount?.completedVideos
+            ? courseProgressCount?.completedVideos
+            : [],
+        },
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      })
+    }
   }
-  catch(err){
-    console.error(err)
-  }
-}
+ 
+
 
 export const getInstructorCourse = async(req,res)=>{
   try{const userId = req.user.id

@@ -3,7 +3,8 @@ import { createCourse,editCourse,getAllCourses,getCourseDetails,getFullCourseDet
 import { createSubSection ,updateSubSection,deleteSubSection} from '../controller/subSection.js';
 import { createSection,getSection,updateSection,deleteSection } from '../controller/Section.js';
 import express from 'express'
-import { authenticateToken,forInstructor } from '../middleware/authMiddleware.js';
+import { authenticateToken,forInstructor, forStudent } from '../middleware/authMiddleware.js';
+import { CourseCompletion } from '../controller/CourseProgress.js';
 
 
 export  const courseRouter = express.Router()
@@ -15,7 +16,7 @@ courseRouter.post('/createcourse/',authenticateToken,forInstructor,createCourse)
 courseRouter.post('/editcourse/',authenticateToken,forInstructor,editCourse);
 courseRouter.get('/',getAllCourses);
 courseRouter.post('/getCourseDetails',getCourseDetails);
-courseRouter.get('courseProgress/:id',authenticateToken ,getFullCourseDetailes)
+courseRouter.post('/getFullCourseDetails',authenticateToken ,getFullCourseDetailes)
 courseRouter.post('/addsection',authenticateToken,forInstructor,createSection)
 courseRouter.get('/section/',getSection)
 courseRouter.post('/section/subsection/',authenticateToken,forInstructor,createSubSection)
@@ -23,3 +24,4 @@ courseRouter.post('/section/updatesection/',authenticateToken,forInstructor,upda
 courseRouter.post('/section/deleteSection/',deleteSection)
 courseRouter.post('/section/updatesubsection/',updateSubSection)
 courseRouter.post('/section/deletesubsection/',deleteSubSection)
+courseRouter.post('/completedCourse',authenticateToken,forStudent,CourseCompletion)

@@ -2,7 +2,8 @@ import { razorpay } from "../config/razorPay.js";
 import User from '../models/User.js'
 import Course from '../models/Course.js'
 import mongoose from "mongoose";
-import crypto from "crypto"
+import crypto from "crypto";
+import CourseProgress from "../models/courseProgress.js";
 
 
 //caputre the course wanted to buy for the user
@@ -96,6 +97,7 @@ export const verifyPayment = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ success: false, message: "User not found" });
             }
+         
 
             for (const courseId of courses) {
                 let course = await Course.findById(courseId);
@@ -113,6 +115,15 @@ export const verifyPayment = async (req, res) => {
                 if (!user.courses.includes(courseId)) {
                     user.courses.push(courseId);
                 }
+                const courseProgress = await CourseProgress.create({
+                    courseID:courseId,
+                    userId:user.id,
+                    completedVideos:[]
+                })
+                if(!user.courseProgress){
+                    user.courseProgress=[];
+                }
+                user.courseProgress.push(courseProgress._id);
             }
 
             await user.save();
