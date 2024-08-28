@@ -156,11 +156,8 @@ export const sendOTP = async (req, res) => {
   return res.status(200).json({
       message: 'Authentication successful',
       token,
-      user: {
-          _id: user._id,
-          name: user.firstName,
-          email: user.email,
-      },
+      user:user
+      ,
   });
 } catch (err) {
   console.error('Error during authentication', err);

@@ -13,6 +13,9 @@ import ViewCourse from "./pages/Viewcourse"
 import AddCourse from "./components/core/Dashboard/Index"
 import Enrolled from "./components/core/Dashboard/EnrolledCourse/Enrolled"
 import VideoDetails from "./components/common/course/VideoDetails"
+import Dashbord from "./components/common/Dashboard/Dashbord"
+import Sidebar from "./components/common/Dashboard/Dashbord"
+import MyProfile from "./components/common/Dashboard/Profile"
 
 
 
@@ -29,7 +32,8 @@ function App() {
        
         <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}/>
         <Route path="dashboard/add-course" element={<AddCourse/>} />
-        <Route path="dashboard/enrolled" element={<Enrolled/>} />
+        
+        
         <Route path="view-course/:courseId" element={
         <PrivateRoute>
           <ViewCourse />
@@ -40,6 +44,10 @@ function App() {
           path="section/:sectionId/sub-section/:subSectionId" 
           element={<VideoDetails />} 
         />
+      </Route>
+      <Route path="dashboard/" element={<Dashbord/>}>
+      <Route element={<MyProfile/>}/>
+      <Route path="dashboard/enrolled" element={<Enrolled/>} />
       </Route>
     </Routes>
     

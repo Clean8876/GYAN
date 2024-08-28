@@ -36,6 +36,7 @@ function Navbar() {
   const dispatch = useDispatch()
 
   const token = useSelector((state) => state.auth?.token);
+  const { user } = useSelector((state) => state.profile)
   
   //const user  = useSelector((state) => state.profile?.user);
 
@@ -199,7 +200,7 @@ cursor: 'pointer', // Ensure pointer behavior,
         <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src='' />
+            <Avatar alt="Remy Sharp" src={user.image} />
           </IconButton>
         </Tooltip>
         <Menu
