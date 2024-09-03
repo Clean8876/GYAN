@@ -1,4 +1,5 @@
 import Category from "../models/Category.js";
+import Course from "../models/Course.js";
 
 
 //create a new category

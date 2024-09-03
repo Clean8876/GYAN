@@ -36,7 +36,7 @@ export default function Enrolled() {
 
   return (
     <>
-      <div className="text-3xl text-richblack-50 font-popo">Enrolled Courses</div>
+      <div className="text-3xl text-richblack-50 font-popo overflow-y:auto">Enrolled Courses</div>
       {!enrolledCourses ? (
         <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
           <div className="spinner"></div>
@@ -86,7 +86,7 @@ export default function Enrolled() {
               <div className="w-1/4 px-2 py-3">
                 {course.totalDuration || "N/A"}
               </div>
-              <div className="flex w-1/5 flex-col gap-2 px-2 py-3">
+              <div className="flex w-1/5 flex-col gap-2 px-2 py-3 font-mono">
                 <p>Progress: {course.progressPercentage || 0}%</p>
                 <ProgressBar
                   completed={course.progressPercentage || 0}

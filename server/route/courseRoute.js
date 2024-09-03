@@ -1,5 +1,5 @@
 import { createCategory ,delCategory,getCategory,getCategoryDetails} from '../controller/Category.js';
-import { createCourse,editCourse,getAllCourses,getCourseDetails,getFullCourseDetailes } from "../controller/Course.js";
+import { createCourse,deleteCourse,editCourse,getAllCourses,getCourseDetails,getFullCourseDetailes,getInstructorCourse } from "../controller/Course.js";
 import { createSubSection ,updateSubSection,deleteSubSection} from '../controller/subSection.js';
 import { createSection,getSection,updateSection,deleteSection } from '../controller/Section.js';
 import express from 'express'
@@ -25,3 +25,6 @@ courseRouter.post('/section/deleteSection/',deleteSection)
 courseRouter.post('/section/updatesubsection/',updateSubSection)
 courseRouter.post('/section/deletesubsection/',deleteSubSection)
 courseRouter.post('/completedCourse',authenticateToken,forStudent,CourseCompletion)
+courseRouter.get('/getInstructorCourses',authenticateToken,forInstructor,getInstructorCourse)
+courseRouter.delete('/deleteCourse/',authenticateToken,deleteCourse)
+

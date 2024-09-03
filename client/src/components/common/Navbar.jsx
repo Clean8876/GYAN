@@ -19,7 +19,6 @@ import Divider from '@mui/material/Divider';
 import logo from '../../assets/gyanlogo.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Logoutbutton from './button/Logoutbutton';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 import { fetchCourseCategories } from '../../services/operations/courseApi';
@@ -108,13 +107,44 @@ function Navbar() {
         <ListItem key="Category" onClick={handleMenuOpen}>
           <ListItemText primary="Category" />
         </ListItem>
-        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-        {menuItems.map((item) => (
-            <MenuItem key={item.id} onClick={() => handleCategoryClick(item)}>
-              {item.name}
-            </MenuItem>
-          ))}
-        </Menu>
+        <Menu
+      anchorEl={anchorEl}
+      open={Boolean(anchorEl)}
+      onClose={handleMenuClose}
+      PaperProps={{
+        elevation: 8,
+        sx: {
+          borderRadius: 2,
+          minWidth: 200,
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)', // Subtle shadow for premium feel
+          mt: 1.5,
+        },
+      }}
+    >
+      {menuItems.map((item) => (
+        <MenuItem
+          key={item.id}
+          onClick={() => handleCategoryClick(item)}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2, // Space between icon and text (if any)
+            borderRadius: 1, // Rounded corners for MenuItems
+            transition: 'all 0.2s ease-in-out',
+            '&:hover': {
+              backgroundColor: 'rgba(22, 21, 21, 0.08)', // Hover effect for MenuItem
+            },
+            '&:focus': {
+              backgroundColor: 'rgba(0, 0, 0, 0.12)', // Focus effect for MenuItem
+            },
+          }}
+        >
+          <Typography variant="body1" color="black" fontFamily="Poppins">
+            {item.name}
+          </Typography>
+        </MenuItem>
+      ))}
+    </Menu>
         <ListItem key="about-us">
           <ListItemText primary="About Us" />
         </ListItem>

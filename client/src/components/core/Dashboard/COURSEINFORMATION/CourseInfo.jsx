@@ -48,7 +48,7 @@ function CourseInfo() {
         setValue("courseImage", course.image)
       }
       getCategories()
-    },[])
+    },[token])
     const isFormUpdated = () => {
         const currentValues = getValues()
         console.log("changes after editing form values:", currentValues)

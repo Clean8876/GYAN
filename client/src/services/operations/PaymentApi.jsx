@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiconnector";
 import { setPaymentLoading } from "../../slices/courseSlice";
 import logo from '../../assets/gyanlogo.png'
-import Razorpay from "razorpay";
+
 
 
 const {CAPTUREPAYMENT_API,VERIFYPAYMENT_API} = studentEndpoint;
@@ -51,7 +51,7 @@ export async function buyCourse(token, courses, user, navigate, dispatch) {
         //options
         const options = {
             // eslint-disable-next-line no-undef
-            key_id: "rzp_test_ytCKASvkcC2aya",
+            key_id: import.meta.env.VITE_RZR_PAY_API,
             amount: `${orderResponse.data.payment.amount}`,
             currency: "INR",
             name:"GYAN",

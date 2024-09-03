@@ -68,7 +68,7 @@ export const createCourse =async(req,res)=>{
     )
     console.log(thumbnailImage)
     // save to database
-      const course = new Course({
+      const courses = new Course({
         title,
         description,
        instructor:user._id,
@@ -79,17 +79,17 @@ export const createCourse =async(req,res)=>{
         status:status
       });
       
-      const newCourse = await course.save();
+      const course = await courses.save();
       
     // Add course to instructor's courses array
-    user.courses.push(newCourse._id);
+    user.courses.push(course._id);
     await user.save();
 
     // Add course to category's courses array
-    categoryDetails.course.push(newCourse._id);
+    categoryDetails.course.push(course._id);
     await categoryDetails.save();
   
-    return res.status(201).json({newCourse});
+    return res.status(201).json(course);
    
 }
      
@@ -258,7 +258,7 @@ export const getFullCourseDetailes = async (req,res)=> {
  
 
 
-export const getInstructorCourse = async(req,res)=>{
+/* export const getInstructorCourse = async(req,res)=>{
   try{const userId = req.user.id
   const inst = await Course.find(userId).sort({createdAt: -1})
 res.json({
@@ -274,7 +274,7 @@ catch(err){
   })
 }
   
-}
+} */
 
 
 export const deleteCourse = async (req,res)=>{
@@ -331,7 +331,23 @@ export const deleteCourse = async (req,res)=>{
 
 
 
-
+export const getInstructorCourse = async(req,res)=>{
+  try{
+    const instructorId = req.user.id;
+    const instructorCourse = await Course.find({instructor:instructorId}).sort({createdAt: -1 });
+    res.status(200).json({
+      success: true,
+      data:instructorCourse
+    })
+  }
+  catch(err){
+    console.error(err)
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error:err.message
+  })}
+}
 
 
 

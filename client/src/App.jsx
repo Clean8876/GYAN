@@ -14,12 +14,18 @@ import AddCourse from "./components/core/Dashboard/Index"
 import Enrolled from "./components/core/Dashboard/EnrolledCourse/Enrolled"
 import VideoDetails from "./components/common/course/VideoDetails"
 import Dashbord from "./components/common/Dashboard/Dashbord"
-import Sidebar from "./components/common/Dashboard/Dashbord"
 import MyProfile from "./components/common/Dashboard/Profile"
+import { ACCOUNT_TYPE } from "./utils/constants"
+import { useSelector } from "react-redux"
+import Instructor from "./components/core/Dashboard/Instructor/Instructor"
+import EditCourse from "./components/core/Dashboard/Instructor/Editcourse"
+
 
 
 
 function App() {
+const {user} = useSelector((state)=> state.profile)
+
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter overflow-y-auto">
       <Navbar/>
@@ -31,8 +37,8 @@ function App() {
         <Route path="/courses/:courseId" element={<CourseDetails/>}/>
        
         <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}/>
-        <Route path="dashboard/add-course" element={<AddCourse/>} />
         
+        <Route path="/dashboard/edit-course/:courseId" element={<EditCourse/>} />
         
         <Route path="view-course/:courseId" element={
         <PrivateRoute>
@@ -45,11 +51,20 @@ function App() {
           element={<VideoDetails />} 
         />
       </Route>
-      <Route path="dashboard/" element={<Dashbord/>}>
-      <Route element={<MyProfile/>}/>
-      <Route path="dashboard/enrolled" element={<Enrolled/>} />
-      </Route>
-    </Routes>
+      <Route path="dashboard" element={<PrivateRoute> <Dashbord/> </PrivateRoute>}>
+  <Route path="profile" element={<MyProfile/>} />
+  {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+    <Route path="enrolled" element={<Enrolled/>} />
+  )}
+  {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+    <><Route path="instructor" element={<Instructor/>} />
+    <Route path="add-course" element={<AddCourse/>} />
+    </>
+    
+  )}
+</Route>
+
+    </Routes> 
     
     </div>
   )

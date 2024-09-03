@@ -1,6 +1,7 @@
+const BASE_URL = import.meta.env.VITE_REACT_APP_API;
+/* 'http://localhost:8000/api' */
 
-
-const BASE_URL = 'http://localhost:8000/api'
+// Log the URL to the console
 
 //AUTH ENDPOINT
 
@@ -28,6 +29,9 @@ export const courseEndpoints = {
   EDIT_COURSE_DETAILS_API:BASE_URL+"/course/editcourse/",
   LECTURE_COMPLETION_API: BASE_URL + "/course/completedCourse",
   GET_FULL_COURSE_DETAILS_AUTHENTICATED:BASE_URL + "/course/getFullCourseDetails",
+  GET_ALL_INSTRUCTOR_COURSES_API:BASE_URL + "/course/getInstructorCourses",
+  DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
+  
 
 }
 
@@ -48,7 +52,8 @@ VERIFYPAYMENT_API:BASE_URL+'/pay/verifyPayment'
 
 
 export const profileEndpoints={
-  GET_USER_ENROLLED_API:BASE_URL+"/profile/getuser"
+  GET_USER_ENROLLED_API:BASE_URL+"/profile/getuser",
+  GET_INSTRUCTOR_DATA_API:BASE_URL+"/profile/instructorDashboard"
 }
 
  
