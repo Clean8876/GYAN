@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 import { VscAdd } from "react-icons/vsc"
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+
 
 import { fetchInstructorCourses } from "../../../../services/operations/courseApi"
 import Iconbtn from "../../../common/Iconbtn"
@@ -9,7 +10,7 @@ import CoursesTable from "./CoursesTable"
 
 export default function MyCourses({handleSidebarItemClick}) {
   const { token } = useSelector((state) => state.auth)
-  const navigate = useNavigate()
+
   const [courses, setCourses] = useState([])
 
   useEffect(() => {
