@@ -29,10 +29,15 @@ app.use(cors({
     origin:process.env.FRONT_END_URL
   
 }))
+app.get('/',(req,res)=>{
+    res.send("sever is ready")
+})
 app.use('/api/user', router);
 app.use('/api/profile', profileroute);
 app.use('/api/course', courseRouter);
 app.use('/api/pay', payrouter);
+
+
 app.use(notFound);
 app.use(errorHandler);
 //setting Port 
@@ -40,8 +45,6 @@ const port = process.env.PORT
 // getting url from the React client
 
 // sending  response to web
-app.get('/',(req,res)=>{
-    res.send("sever is ready")
-})
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);})
