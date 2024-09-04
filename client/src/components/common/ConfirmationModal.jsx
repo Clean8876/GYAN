@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import Iconbtn from "./Iconbtn"
+import Iconbtn from "./Iconbtn.jsx"
 
 export default function ConfirmationModal({ modalData }) {
   return (
