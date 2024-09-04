@@ -23,7 +23,7 @@ export default function InstructorChart({ courses }) {
 
   // Data for the chart displaying student information
   const chartDataStudents = {
-    labels: courses.map((course) => course.title),
+    labels: courses.map((course) => course.courseName),
     datasets: [
       {
         data: courses.map((course) => course.totalStudentsEnrolled),
@@ -31,10 +31,15 @@ export default function InstructorChart({ courses }) {
       },
     ],
   }
+  // Log the titles and total amount generated
+courses.forEach((course) => {
+  console.log(`Course Title: ${course.courseName}`);
+  console.log(`Total Amount Generated: ${course.totalAmountGenerated}`);
+});
 
   // Data for the chart displaying income information
   const chartIncomeData = {
-    labels: courses.map((course) => course.title),
+    labels: courses.map((course) => course.courseName),
     datasets: [
       {
         data: courses.map((course) => course.totalAmountGenerated),

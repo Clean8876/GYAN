@@ -31,7 +31,7 @@ function Dashbord() {
           text="My Profile"
           onClick={() => handleSidebarItemClick('MyProfile')}
         />
-        {user?.accountType=== "STUDENT" && (<><SidebarItem
+        {user?.accountType=== "Student" && (<><SidebarItem
           icon={<GiGraduateCap size={20}/>}
           text="Enrolled Course"
           onClick={() => handleSidebarItemClick('Enrolled')}

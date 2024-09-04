@@ -25,7 +25,10 @@ app.use(fileUpload({
 
 // Setup the API route
 app.use(cookieParser())
-app.use(cors());
+app.use(cors({
+    origin:process.env.FRONT_END_URL
+  
+}))
 app.use('/api/user', router);
 app.use('/api/profile', profileroute);
 app.use('/api/course', courseRouter);
@@ -33,7 +36,7 @@ app.use('/api/pay', payrouter);
 app.use(notFound);
 app.use(errorHandler);
 //setting Port 
-const port = process.env.PORT||5000   
+const port = process.env.PORT
 // getting url from the React client
 
 // sending  response to web
