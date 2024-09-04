@@ -19,7 +19,18 @@ export const uploadImageToCloudinary  = async (file, folder, height, quality) =>
   if(quality) {
       options.quality = quality;
   }
-  options.resource_type = "auto";
+  if (file.mimetype.startsWith('video')) {
+    options.resource_type = 'video';
+  } else {
+    options.resource_type = 'image';
+  }
 
-  return await cloudinary.uploader.upload(file.tempFilePath, options);
+  try {
+    const result = await cloudinary.v2.uploader.upload(file.tempFilePath, options);
+    console.log('Upload Result:', result);
+    return result;
+  } catch (error) {
+    console.error('Upload Error:', error);
+    throw error;
+  }
 }

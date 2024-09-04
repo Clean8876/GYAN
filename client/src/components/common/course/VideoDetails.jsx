@@ -4,9 +4,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { markLectureAsComplete } from '../../../services/operations/courseApi';
 import { updateCompletedLectures } from '../../../slices/ViewCourse';
 import { BigPlayButton, Player } from 'video-react';
+import Iconbtn from "../Iconbtn"
 import 'video-react/dist/video-react.css';
-
-import Iconbtn from '../Iconbtn';
 
 const VideoDetails = () => {
 

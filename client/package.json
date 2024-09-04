@@ -14,7 +14,7 @@
     "@mui/material": "^6.0.2",
     "@ramonak/react-progress-bar": "^5.2.0",
     "@reduxjs/toolkit": "^2.2.6",
-    "axios": "^1.7.2",
+    "axios": "^1.7.7",
     "chart.js": "^4.4.4",
     "client": "file:",
     "dotenv": "^16.4.5",
