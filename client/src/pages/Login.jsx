@@ -32,6 +32,9 @@ function Login() {
     e.preventDefault()
     dispatch(login(email, password, navigate))
   }
+  const handelForget =()=>{
+    navigate('/forgetPassword')
+  }
   return (
     <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -113,7 +116,7 @@ function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" onClick={handelForget}>
                   Forgot password?
                 </Link>
               </Grid>

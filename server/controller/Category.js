@@ -5,10 +5,10 @@ import Course from "../models/Course.js";
 //create a new category
 export const createCategory = async(req,res)=>{
     const{name,description} = req.body;
-    const Category = new Category({name,description});
+    const Categories = new Category({name,description});
     try{
-        await Category.save();
-        res.status(201).json(Category);
+        await Categories.save();
+        res.status(201).json(Categories);
         }catch(error){
             res.status(409).json({message:error.message});
             }

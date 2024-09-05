@@ -19,6 +19,8 @@ import { ACCOUNT_TYPE } from "./utils/constants"
 import { useSelector } from "react-redux"
 import Instructor from "./components/core/Dashboard/Instructor/Instructor"
 import EditCourse from "./components/core/Dashboard/Instructor/Editcourse"
+import ForgotPassword from "./pages/Forgot"
+import UpdatePassword from "./pages/Updatepass"
 
 
 
@@ -31,10 +33,19 @@ const {user} = useSelector((state)=> state.profile)
       <Navbar/>
     <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/forgetPassword" element={<ForgotPassword/>}/>
         <Route path="/category/:catalogName" element={<Catalog/>}/>
         <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/>
         <Route path="/verify-email" element={<Emailverify/>}/>
         <Route path="/courses/:courseId" element={<CourseDetails/>}/>
+        <Route
+          path="changePassword/:id"
+          element={
+            <OpenRoute>
+              <UpdatePassword/>
+            </OpenRoute>
+          }
+        /> 
        
         <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}/>
         

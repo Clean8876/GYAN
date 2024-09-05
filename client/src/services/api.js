@@ -32,6 +32,7 @@ export const courseEndpoints = {
   GET_ALL_INSTRUCTOR_COURSES_API:BASE_URL + "/course/getInstructorCourses",
   DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
   
+  
 
 }
 
