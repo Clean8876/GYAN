@@ -14,7 +14,7 @@ export const mailSender = async (email, title, body) => {
     });
     // Send emails to users
     let info = await transporter.sendMail({
-      from: 'gyanedtech@outlook.com',
+      from: 'GYAN ',
       to: email,
       subject: title,
       html: body,
