@@ -48,7 +48,7 @@ function Home() {
                 },
               }}
             >
-              {/* <Image /> */}
+              {<Image />}
             </Box>
           </Box>
         </Container>
@@ -77,7 +77,7 @@ function Home() {
               Build the community of learning together, and make the world joy of learning coding
             </div>
             <div className="mt-[100px]">
-             {/*  <Worldmap /> */}
+             {<Worldmap />
             </div>
           </div>
         </Box>
