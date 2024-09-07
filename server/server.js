@@ -30,7 +30,7 @@ app.use(cors({
 		credentials:true,
   
 }))
-app.get('/api',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send("sever is ready")
 })
 app.use('/api/user', router);
