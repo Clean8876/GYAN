@@ -1,4 +1,4 @@
-import Map from '../../../assets/map.png'
+import map from "../../../assets/map.png"
 import MobileMap from '../../../assets/Mmap.png'
 
 import { useState,useEffect } from 'react'
@@ -15,7 +15,7 @@ function Worldmap() {
     <img
     className="w-full max-w-[1120px] h-100px" 
     alt="World Map"
-    src={isMobile ? MobileMap : Map} 
+    src={isMobile ? MobileMap : map} 
   />
 
   )
