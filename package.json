@@ -35,7 +35,6 @@
     "dotenv": "^16.4.5",
     "gyan": "file:",
     "mongodb": "^6.7.0",
-    "razorpay": "^2.9.4",
     "swiper": "^11.1.4",
     "vercel": "^37.1.2"
   }
