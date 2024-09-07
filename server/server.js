@@ -26,10 +26,11 @@ app.use(fileUpload({
 // Setup the API route
 app.use(cookieParser())
 app.use(cors({
-    origin:process.env.FRONT_END_URL
+    origin:"*",
+		credentials:true,
   
 }))
-app.get('/',(req,res)=>{
+app.get('/api',(req,res)=>{
     res.send("sever is ready")
 })
 app.use('/api/user', router);
