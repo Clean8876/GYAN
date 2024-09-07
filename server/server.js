@@ -26,10 +26,9 @@ app.use(fileUpload({
 // Setup the API route
 app.use(cookieParser())
 app.use(cors({
-    origin:"https://gyan-six.vercel.app/",
-		credentials:true,
-  
-}))
+    origin: 'https://gyan-six.vercel.app',
+    credentials: true, // if you need to send cookies or HTTP authentication
+  }));
 app.get('/',(req,res)=>{
     res.send("sever is ready")
 })
