@@ -26,7 +26,7 @@ app.use(fileUpload({
 // Setup the API route
 app.use(cookieParser())
 app.use(cors({
-    origin:"*",
+    origin:"https://gyan-six.vercel.app/",
 		credentials:true,
   
 }))
