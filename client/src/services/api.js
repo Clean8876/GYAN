@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_REACT_APP_API;
+const BASE_URL = "https://gyan-backend.vercel.app/api";
 /* 'http://localhost:8000/api' */
 
 // Log the URL to the console
@@ -6,9 +6,9 @@ const BASE_URL = import.meta.env.VITE_REACT_APP_API;
 //AUTH ENDPOINT
 
 export const endpoints = {
-    SENDOTP_API: BASE_URL + "user/sendotp",
-    SIGNUP_API: BASE_URL + "user/register",
-    LOGIN_API: BASE_URL + "user/login",
+    SENDOTP_API: BASE_URL + "/user/sendotp",
+    SIGNUP_API: BASE_URL + "/user/register",
+    LOGIN_API: BASE_URL + "/user/login",
     RESETPASSTOKEN_API: BASE_URL + "/user/resetlink",
     RESETPASSWORD_API: BASE_URL + "/user/resetPassword",
 
@@ -16,13 +16,13 @@ export const endpoints = {
 // COURSE ENDPOINTS
 export const courseEndpoints = {
 
-  COURSE_DETAILS_API: BASE_URL + "course/getCourseDetails",
-  COURSE_CATEGORIES_API: BASE_URL + "course/category/",
-  CREATE_COURSE_API:BASE_URL+"course/createcourse/",
-  EDIT_COURSE_API:BASE_URL+"courseeditcourse/",
-  DELETE_SECTION_API:BASE_URL+"course/section/deleteSection/",
-  DELETE_SUBSECTION_API:BASE_URL+"course/section/deletesubsection/",
-  CREATE_SECTION_API:BASE_URL+"course/addsection",
+  COURSE_DETAILS_API: BASE_URL + "/course/getCourseDetails",
+  COURSE_CATEGORIES_API: BASE_URL + "/course/category/",
+  CREATE_COURSE_API:BASE_URL+"/course/createcourse/",
+  EDIT_COURSE_API:BASE_URL+"/course/editcourse/",
+  DELETE_SECTION_API:BASE_URL+"/course/section/deleteSection/",
+  DELETE_SUBSECTION_API:BASE_URL+"/course/section/deletesubsection/",
+  CREATE_SECTION_API:BASE_URL+"/course/addsection",
   UPDATE_SECTION_API:BASE_URL+"/course/section/updatesection/",
   CREATE_SUBSECTION_API:BASE_URL+"/course/section/subsection/",
   UPDATE_SUBSECTION_API:BASE_URL+"/course/section/updatesubsection/",
